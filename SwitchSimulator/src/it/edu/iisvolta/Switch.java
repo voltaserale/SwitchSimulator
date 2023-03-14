@@ -1,11 +1,11 @@
 package it.edu.iisvolta;
 
 public class Switch {
-	private String[] porte=new String[5];
+	private String[] porte=new String[5];		//memorizza i mac address per ogni porta
 	private String[] messaggi=new String[5];
 	private int stato;
 	
-	public Switch() {
+	public Switch() {		//costruttore
 		for(int i=0;i<5;i++) {
 			porte[i]="";
 			messaggi[i]="";
@@ -33,7 +33,7 @@ public class Switch {
 		if (stato==0) 
 			System.out.println("Lo switch deve essere acceso!"); 
 		else if (porta<0 || porta>4)
-			System.out.println("Porta non valida!")
+			System.out.println("Porta non valida!");
 		else {
 			if (!porte[porta].isEmpty() &&				//la porta di ingresso non è vuota
 				!porte[porta].equals(macAddressSrc))		//sulla porta di ingresso c'è un mac address diverso da macAddressSrc
@@ -50,7 +50,7 @@ public class Switch {
 			if (pos<0) {			//il mac destinazione non è presente nella tabella
 				//mando il messaggio su tutte le porte tranne quella di ingresso
 				for(int i=0;i<5;i++)
-					if (i!=pos)
+					if (i!=porta)
 						messaggi[i]=messaggio;
 			} else {		//il mac destinazione è presente nella tabella
 				//mando il messaggio solo sulla porta corrispondente al mac destinazione
@@ -59,4 +59,20 @@ public class Switch {
 		}
 			
 	}
+	
+	public String getStato() {
+		if (stato==0)
+			return "SPENTO";
+		else
+			return "ACCESO";
+	}
+	
+	public String getMacAddress(int porta) {
+		return porte[porta];
+	}
+	
+	public String getMessage(int porta) {
+		return messaggi[porta];
+	}
+
 }
